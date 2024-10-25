@@ -11,6 +11,8 @@ export default function Signup() {
         const data = Object.fromEntries(fd.entries()) // te crea un hash key, value con los valores del form
         data.acquisition = acqusitionChannel
         console.log(data)
+
+        event.target.reset();// reset the form also you can do it with the type='reset' in the btn<label>
     }
     return (
       <form onSubmit={handleSubmit}>
