@@ -1,23 +1,16 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Login() {
-  const [enteredValues, setEnteredValues] = useState({
-    email: '',
-    pwd: ''
-  });
+  const email = useRef()
+  const pwd = useRef()
 
   function handleSubmit(event) {
     event.preventDefault();
-  
-    console.log(enteredValues)
+    const enteredEmail = email.current.value
+    const enteredPwd = pwd.current.value
+    console.log(enteredEmail, enteredPwd)
   }
 
-  function handleInputChange(identifier, value) {
-    setEnteredValues(preValues => ({
-      ...preValues,
-      [identifier]: value
-    }))
-  }
   return (
     // onSubmit is for doesnt reload the page 
     <form onSubmit={handleSubmit}>
@@ -30,17 +23,15 @@ export default function Login() {
             id="email" 
             type="email"
             name="email"
-            onChange={(event) => handleInputChange('email', event.target.value)}
-            value={enteredValues.email}
+            ref={email}
             />
         </div>
 
         <div className="control no-margin">
           <label htmlFor="password">Password</label>
           <input id="password" type="password" name="password"
-             onChange={(event) => handleInputChange('pwd', event.target.value)}
-             value={enteredValues.pwd}
-              />
+          ref={pwd}
+          />
         </div>
       </div>
 
