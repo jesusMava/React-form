@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function Signup() {
+  const [passwordAreNotEqual, setPasswordAreNotEqual] = useState(false)
+
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -10,6 +14,10 @@ export default function Signup() {
         //no puede acceder a ellos debido a que tienen el mismo name<label>
         const data = Object.fromEntries(fd.entries()) // te crea un hash key, value con los valores del form
         data.acquisition = acqusitionChannel
+        //password is the name of the input in his property name
+        if(data.password !== data.confirm-password){
+          return setPasswordAreNotEqual(true)
+        }
         console.log(data)
 
         event.target.reset();// reset the form also you can do it with the type='reset' in the btn<label>
@@ -37,6 +45,9 @@ export default function Signup() {
               type="password"
               name="confirm-password"
             />
+            <div className="control-error">
+              {passwordAreNotEqual && <p>Password mush match.</p>}
+            </div>
           </div>
         </div>
   
